@@ -8,20 +8,39 @@
 use Mix.Config
 
 config :rocketpay,
-  ecto_repos: [Rocketpay.Repo]
+       ecto_repos: [Rocketpay.Repo]
 
 # Configures the endpoint
-config :rocketpay, RocketpayWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "GBCov1HfzJSmGw3lukRg3Fb+OMcbatvdT+pDL5nQeGiC7CYlAxz9PRkqwI5FhGy7",
-  render_errors: [view: RocketpayWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Rocketpay.PubSub,
-  live_view: [signing_salt: "nNwfD5Tk"]
+config :rocketpay,
+       RocketpayWeb.Endpoint,
+       url: [
+         host: "localhost"
+       ],
+       secret_key_base: "GBCov1HfzJSmGw3lukRg3Fb+OMcbatvdT+pDL5nQeGiC7CYlAxz9PRkqwI5FhGy7",
+       render_errors: [
+         view: RocketpayWeb.ErrorView,
+         accepts: ~w(json),
+         layout: false
+       ],
+       pubsub_server: Rocketpay.PubSub,
+       live_view: [
+         signing_salt: "nNwfD5Tk"
+       ]
+
+config :rocketpay,
+       Rocketpay.Repo,
+       migration_primary_key: [
+         type: :binary_id
+       ],
+       migration_foreign_key: [
+         type: :binary_id
+       ]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+config :logger,
+       :console,
+       format: "$time $metadata[$level] $message\n",
+       metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
